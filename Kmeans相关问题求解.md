@@ -107,6 +107,12 @@ plt.show()
 #print(f"SSE：{model.inertia_}")
 ```
 + 丢给ai改过几次，但还是报错（或者说是警告？），⚠️处应该是需要修改的部分
-+ 输出：
-<img width="2508" height="334" alt="image" src="https://github.com/user-attachments/assets/3a81ea8f-b4df-448d-8510-f122fe1b2e35" />
++ 部分输出：
+```
+标签是[array([0, 0, 0, ..., 0, 0, 0], shape=(51394,), dtype=int32), array([1, 1, 1, ..., 0, 0, 0], shape=(51394,), dtype=int32), array([2, 2, 2, ..., 0, 0, 0], shape=(51394,), dtype=int32), array([2, 2, 2, ..., 0, 0, 0], shape=(51394,), dtype=int32), array([4, 4, 4, ..., 0, 0, 0], shape=(51394,), dtype=int32), array([4, 4, 4, ..., 5, 5, 5], shape=(51394,), dtype=int32), array([4, 4, 4, ..., 5, 5, 5], shape=(51394,), dtype=int32), array([7, 7, 7, ..., 4, 4, 4], shape=(51394,), dtype=int32), array([7, 7, 7, ..., 4, 4, 4], shape=(51394,), dtype=int32)]
+[0.7084912912255967, 0.6193451803848082, 0.5583749184931445, 0.5247688770789104, 0.4937205833926103, 0.49089062496113606, 0.47954408905174195, 0.46009324537928714]
+c:\Users\Hmbb7\Desktop\数模备赛\规划\Kmean\K-mean.py:90: UserWarning: No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+  plt.legend()
+```
+
 
