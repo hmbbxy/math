@@ -45,6 +45,69 @@ for k, lbl in enumerate(labels, start=1):
 
 + 图示（以 k=3 为例，红色为标签 0 的样本）
 
+```python
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+import numpy as np
+
+# 1. 生成模拟数据 (为了演示，生成类似图中的数据分布)
+# 这里生成 3 个簇，分别分布在左下、中间、右上
+X, _ = make_blobs(n_samples=300, centers=[[-2, -2], [0, 0], [2, 2]], 
+                  cluster_std=[0.5, 0.6, 0.8], random_state=42)
+
+# 2. 训练 K-Means 模型 (K=3)
+kmeans = KMeans(n_clusters=3, random_state=42)
+labels = kmeans.fit_predict(X)
+centroids = kmeans.cluster_centers_ # 获取质心坐标
+
+# 3. 开始绘图
+plt.figure(figsize=(10, 6), dpi=100) # 设置画布大小和清晰度
+
+# --- 核心步骤：分别绘制不同的簇 ---
+# 3.1 绘制簇 0 (高亮显示，红色)
+# 注意：这里通过 labels == 0 进行布尔索引，筛选出属于簇0的数据点
+plt.scatter(X[labels == 0, 0], X[labels == 0, 1], 
+            c='#E63946',  # 红色
+            s=100,        # 点的大小
+            alpha=0.9,    # 透明度
+            label=f'簇0 (标签0, {np.sum(labels == 0)}个)') # 动态计算数量
+
+# 3.2 绘制簇 1 和 簇 2 (灰度显示)
+# 这里用循环遍历其他簇，统一设置为灰色
+for i in range(1, 3):
+    plt.scatter(X[labels == i, 0], X[labels == i, 1], 
+                c='#D3D3D3',  # 浅灰色
+                s=100, 
+                alpha=0.8, 
+                label=f'簇{i}')
+
+# 3.3 绘制质心 (深蓝色 X)
+plt.scatter(centroids[:, 0], centroids[:, 1], 
+            c='#1D3557',  # 深蓝色
+            marker='X',   # X 形状
+            s=300,        # 质心点要大一些
+            edgecolors='white', # 边缘白色，增加立体感
+            linewidths=1.5,
+            label='质心',
+            zorder=10)    # 确保质心画在最上层
+
+# 4. 美化图表
+plt.title('K=3 聚类结果：红色为标签0样本', fontsize=18, pad=20)
+plt.xlabel('total_amount (标准化)', fontsize=14) # 根据你的业务修改
+plt.ylabel('total_amount (标准化)', fontsize=14)
+
+# 设置图例 (Legend)
+plt.legend(fontsize=12, loc='upper left', frameon=True, facecolor='white', framealpha=0.9)
+
+# 添加网格线
+plt.grid(True, linestyle='-', alpha=0.3)
+
+# 显示图表
+plt.tight_layout()
+plt.show()
+```
+
 ![K=3 聚类：红色为标签0样本](kmeans_label0_demo.png)
 
 
